@@ -1,55 +1,82 @@
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { MapPin, Navigation, Clock, Phone } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 
 export const TrackingMockup = () => {
-    return (
-        <Card className="w-full">
-            <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                    <Navigation className="w-5 h-5 text-primary" />
-                    Acompanhamento em Tempo Real
-                </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-                {/* Map Placeholder */}
-                <div className="bg-muted aspect-video rounded-lg flex items-center justify-center relative overflow-hidden border">
-                    <div className="absolute inset-0 bg-[url('https://cartodb-basemaps-a.global.ssl.fastly.net/light_all/15/9643/12321.png')] bg-cover opacity-50" />
-                    <div className="relative flex flex-col items-center gap-2">
-                        <MapPin className="w-8 h-8 text-primary animate-bounce" />
-                        <span className="bg-background/80 px-2 py-1 rounded text-xs font-medium backdrop-blur">
-                            Entregador próximo
-                        </span>
-                    </div>
-                </div>
+  return (
+    <Card className="border-2 border-success/20">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <MapPin className="w-5 h-5 text-success" />
+          Mockup: Rastreamento em Tempo Real
+        </CardTitle>
+        <CardDescription>
+          Wireframe da tela de tracking do cliente (OrderPage.tsx)
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        {/* Mapa Mockup */}
+        <div className="bg-muted/50 border-2 border-border rounded-lg p-4 h-48 relative overflow-hidden">
+          <div className="absolute inset-0 opacity-20">
+            <div className="grid grid-cols-8 gap-1 h-full p-2">
+              {Array.from({ length: 64 }).map((_, i) => (
+                <div key={i} className="bg-border/50 rounded-sm" />
+              ))}
+            </div>
+          </div>
+          <div className="relative z-10 flex flex-col items-center justify-center h-full">
+            <Navigation className="w-10 h-10 text-primary animate-pulse" />
+            <p className="text-xs text-muted-foreground mt-2">TrackingMap.tsx</p>
+            <Badge variant="outline" className="mt-2 bg-success/10 text-success text-xs">
+              Supabase Realtime
+            </Badge>
+          </div>
+        </div>
 
-                {/* Status Steps */}
-                <div className="space-y-4">
-                    <div className="flex justify-between text-sm font-medium">
-                        <span>Preparando</span>
-                        <span className="text-primary">A caminho</span>
-                        <span className="text-muted-foreground">Entregue</span>
-                    </div>
-                    <Progress value={66} className="h-2" />
-                </div>
+        {/* Status Cards */}
+        <div className="grid grid-cols-3 gap-2">
+          <div className="bg-card border rounded-lg p-3 text-center">
+            <Clock className="w-5 h-5 mx-auto text-warning" />
+            <p className="text-xs mt-1 font-medium">12 min</p>
+            <p className="text-xs text-muted-foreground">Previsão</p>
+          </div>
+          <div className="bg-card border rounded-lg p-3 text-center">
+            <MapPin className="w-5 h-5 mx-auto text-primary" />
+            <p className="text-xs mt-1 font-medium">1.2 km</p>
+            <p className="text-xs text-muted-foreground">Distância</p>
+          </div>
+          <div className="bg-card border rounded-lg p-3 text-center">
+            <Phone className="w-5 h-5 mx-auto text-accent" />
+            <p className="text-xs mt-1 font-medium">Contato</p>
+            <p className="text-xs text-muted-foreground">Entregador</p>
+          </div>
+        </div>
 
-                {/* Driver Info */}
-                <div className="flex items-center gap-4 p-4 bg-muted/50 rounded-lg">
-                    <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                        <span className="font-bold text-primary">CD</span>
-                    </div>
-                    <div className="flex-1">
-                        <p className="font-medium">Carlos Driver</p>
-                        <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                            <Clock className="w-3 h-3" />
-                            <span>Chega em 5 min</span>
-                        </div>
-                    </div>
-                    <button className="p-2 hover:bg-background rounded-full transition-colors">
-                        <Phone className="w-4 h-4" />
-                    </button>
-                </div>
-            </CardContent>
-        </Card>
-    );
+        {/* Status Timeline */}
+        <div className="border rounded-lg p-3 space-y-2">
+          <p className="text-sm font-medium">Status do Pedido</p>
+          <div className="flex items-center gap-2 text-xs">
+            <div className="w-3 h-3 rounded-full bg-success" />
+            <span className="text-success">Pedido confirmado</span>
+          </div>
+          <div className="flex items-center gap-2 text-xs">
+            <div className="w-3 h-3 rounded-full bg-success" />
+            <span className="text-success">Em preparo</span>
+          </div>
+          <div className="flex items-center gap-2 text-xs">
+            <div className="w-3 h-3 rounded-full bg-primary animate-pulse" />
+            <span className="text-primary font-medium">Saiu para entrega</span>
+          </div>
+          <div className="flex items-center gap-2 text-xs">
+            <div className="w-3 h-3 rounded-full bg-muted" />
+            <span className="text-muted-foreground">Entregue</span>
+          </div>
+        </div>
+
+        <p className="text-xs text-muted-foreground text-center">
+          Deadline: 29/12 • Integração com Supabase Realtime + geolocation API
+        </p>
+      </CardContent>
+    </Card>
+  );
 };
