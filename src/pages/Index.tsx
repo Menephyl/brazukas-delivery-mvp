@@ -20,234 +20,125 @@ interface Phase {
   title: string;
   description: string;
   tasks: Task[];
+  status?: "done" | "in-progress" | "pending" | "waiting";
 }
 
-const initialCommonPhases: Phase[] = [
-  {
-    id: 0,
-    title: "Fase 0: Organização do Projeto",
-    description: "Ambos",
-    tasks: [
-      { id: "0-1", title: "Criar monorepo (ou estrutura de pastas)", completed: true },
-      { id: "0-2", title: "Definir arquitetura geral (front, backend, DB)", completed: true },
-      { id: "0-3", title: "Criar README inicial", completed: true },
-      { id: "0-4", title: "Criar board Kanban", completed: true },
-      { id: "0-5", title: "Criar contratos de API (Types)", completed: true },
-    ],
-  },
-];
-
-const initialBackendPhases: Phase[] = [
+const initialGeneralPhases: Phase[] = [
   {
     id: 1,
-    title: "Fase 1: Setup e Fundamentos",
-    description: "Backend (Thálisson)",
+    title: "Fase 1: Planejamento e Requisitos",
+    description: "Concluída (100%)",
+    status: "done",
     tasks: [
-      { id: "b-1-1", title: "Inicializar projeto Node.js + TS", completed: true },
-      { id: "b-1-2", title: "Criar arquitetura: src/modules/*", completed: true },
-      { id: "b-1-3", title: "Configurar Express / Fastify", completed: true },
-      { id: "b-1-4", title: "Criar Auth base (JWT + Refresh Token)", completed: true },
-      { id: "b-1-5", title: "Criar .env + validação Zod", completed: true },
-      { id: "b-1-6", title: "MySQL + Drizzle + PlanetScale", completed: false },
-      { id: "b-1-7", title: "Conexão DB + migrations automáticas", completed: false },
-      { id: "b-1-8", title: "Criar logger (Pino/Winston)", completed: false },
-      { id: "b-1-9", title: "Middlewares globais (error, rate limit)", completed: false },
-    ],
-  },
-  {
-    id: 2,
-    title: "Fase 2: Autenticação e Usuários",
-    description: "Backend (Thálisson)",
-    tasks: [
-      { id: "b-2-1", title: "Registro / Login", completed: false },
-      { id: "b-2-2", title: "Função 'login único' (SSO)", completed: false },
-      { id: "b-2-3", title: "Recuperação de senha", completed: false },
-      { id: "b-2-4", title: "Perfis (usuário, parceiro, etc)", completed: false },
-      { id: "b-2-5", title: "Sessão persistente", completed: false },
-    ],
-  },
-  {
-    id: 3,
-    title: "Fase 3: Módulo Delivery",
-    description: "Backend (Thálisson)",
-    tasks: [
-      { id: "b-3-1", title: "Restaurantes (CRUD)", completed: false },
-      { id: "b-3-2", title: "Cardápios + categorias", completed: false },
-      { id: "b-3-3", title: "Itens + Horários", completed: false },
-      { id: "b-3-4", title: "Filtros e busca", completed: false },
-      { id: "b-3-5", title: "Carrinho (Lógica)", completed: false },
-      { id: "b-3-6", title: "Pedido → Checkout → Status", completed: false },
-      { id: "b-3-7", title: "Tracking simples", completed: false },
-      { id: "b-3-8", title: "Job: abrir/fechar auto", completed: false },
-    ],
-  },
-  {
-    id: 4,
-    title: "Fase 4: Módulo Banco",
-    description: "Backend (Thálisson)",
-    tasks: [
-      { id: "b-4-1", title: "Criar contas (Real/Guarani/USD)", completed: false },
-      { id: "b-4-2", title: "Saldo multi-moeda", completed: false },
-      { id: "b-4-3", title: "PIX interno (mock)", completed: false },
-      { id: "b-4-4", title: "Conversão/cotação", completed: false },
-      { id: "b-4-5", title: "Fluxo KYC (mock integrado)", completed: false },
-    ],
-  },
-  {
-    id: 5,
-    title: "Fase 5: Módulo Aluguéis",
-    description: "Backend (Thálisson)",
-    tasks: [
-      { id: "b-5-1", title: "CRUD imóveis + Filtros", completed: false },
-      { id: "b-5-2", title: "Reservas", completed: false },
-      { id: "b-5-3", title: "Agendar visita", completed: false },
-      { id: "b-5-4", title: "Chat simplificado", completed: false },
-    ],
-  },
-  {
-    id: 6,
-    title: "Fase 6: Módulo Produtos / Loja",
-    description: "Backend (Thálisson)",
-    tasks: [
-      { id: "b-6-1", title: "CRUD produtos + estoque", completed: false },
-      { id: "b-6-2", title: "Carrinho unificado", completed: false },
-      { id: "b-6-3", title: "Pedidos + tracking", completed: false },
-      { id: "b-6-4", title: "Integração entre módulos", completed: false },
-    ],
-  },
-  {
-    id: 7,
-    title: "Fase 7: Mapa da Colônia",
-    description: "Backend (Thálisson)",
-    tasks: [
-      { id: "b-7-1", title: "Registro dos pontos (lojas, etc)", completed: false },
-      { id: "b-7-2", title: "Filtros por categoria", completed: false },
-      { id: "b-7-3", title: "Endpoint de lista + detalhes", completed: false },
+      { id: "g-1-1", title: "Definir Escopo: Funcionalidades Home/Restaurantes", completed: true },
+      { id: "g-1-2", title: "Definir Personas (Cliente, Entregador, Admin)", completed: true },
+      { id: "g-1-3", title: "Listar Features Chave (Login, Busca, Carrinho)", completed: true },
     ],
   },
   {
     id: 8,
-    title: "Fase 8: Utilidades",
-    description: "Backend (Thálisson)",
+    title: "Fase 8: Deploy e Lançamento",
+    description: "Aguardando",
+    status: "waiting",
     tasks: [
-      { id: "b-8-1", title: "API “status da ponte”", completed: false },
-      { id: "b-8-2", title: "Clima atual + Cache Redis", completed: false },
-      { id: "b-8-3", title: "Câmbio BRL↔PYG↔USD com timestamp", completed: false },
+      { id: "g-8-1", title: "Configurar Ambientes (Dev/Staging/Prod)", completed: false },
+      { id: "g-8-2", title: "Hospedagem (Vercel/Render) e Domínio", completed: false },
+      { id: "g-8-3", title: "CI/CD Pipeline", completed: false },
     ],
   },
   {
     id: 9,
-    title: "Fase 9: Blog",
-    description: "Backend (Thálisson)",
+    title: "Fase 9: Manutenção",
+    description: "Pós-Lançamento",
+    status: "waiting",
     tasks: [
-      { id: "b-9-1", title: "CRUD posts + slugs", completed: false },
-      { id: "b-9-2", title: "Categorias + SEO", completed: false },
-    ],
-  },
-  {
-    id: 10,
-    title: "Fase 10: Infraestrutura",
-    description: "Backend (Thálisson)",
-    tasks: [
-      { id: "b-10-1", title: "Upload de imagens (S3/Cloudflare)", completed: false },
-      { id: "b-10-2", title: "CI/CD GitHub Actions", completed: false },
-      { id: "b-10-3", title: "Deploy na VPS / Docker", completed: false },
+      { id: "g-9-1", title: "Monitoramento e Analytics", completed: false },
+      { id: "g-9-2", title: "SEO e Marketing", completed: false },
     ],
   },
 ];
 
 const initialFrontendPhases: Phase[] = [
   {
-    id: 1,
-    title: "Fase 1: Setup e Fundamentos",
-    description: "Frontend (Yan)",
-    tasks: [
-      { id: "f-1-1", title: "Criar app Next.js (App Router)", completed: true },
-      { id: "f-1-2", title: "Configurar TailwindCSS + shadcn/ui", completed: true },
-      { id: "f-1-3", title: "Tema global + tokens de cor", completed: true },
-      { id: "f-1-4", title: "Layout base (Header/Footer)", completed: false },
-      { id: "f-1-5", title: "Autenticação via cookies", completed: false },
-    ],
-  },
-  {
     id: 2,
-    title: "Fase 2: Páginas Públicas",
-    description: "Frontend (Yan)",
+    title: "Fase 2: Design UI/UX",
+    description: "Concluída (90%)",
+    status: "done",
     tasks: [
-      { id: "f-2-1", title: "Home (herói, módulos, métricas)", completed: false },
-      { id: "f-2-2", title: "Sobre/Contato", completed: false },
-      { id: "f-2-3", title: "Troca de idioma", completed: false },
-      { id: "f-2-4", title: "Login / Cadastro / Recuperação", completed: false },
+      { id: "f-2-1", title: "Wireframes (Home, Carrinho, Login)", completed: true },
+      { id: "f-2-2", title: "Identidade Visual e Acessibilidade", completed: true },
+      { id: "f-2-3", title: "Protótipos Interativos", completed: true },
     ],
   },
   {
     id: 3,
-    title: "Fase 3: Delivery",
-    description: "Frontend (Yan)",
+    title: "Fase 3: Desenvolvimento Frontend",
+    description: "Foco Imediato",
+    status: "pending",
     tasks: [
-      { id: "f-3-1", title: "Listagem de restaurantes + filtros", completed: false },
-      { id: "f-3-2", title: "Página do restaurante", completed: false },
-      { id: "f-3-3", title: "Carrinho lateral + Checkout", completed: false },
-      { id: "f-3-4", title: "Rastreamento do pedido", completed: false },
-    ],
-  },
-  {
-    id: 4,
-    title: "Fase 4: Banco",
-    description: "Frontend (Yan)",
-    tasks: [
-      { id: "f-4-1", title: "Landing page modernas do banco", completed: false },
-      { id: "f-4-2", title: "Simulador de crédito", completed: false },
-      { id: "f-4-3", title: "Dashboard financeiro", completed: false },
-      { id: "f-4-4", title: "Tela de câmbio + Cartão virtual", completed: false },
-    ],
-  },
-  {
-    id: 5,
-    title: "Fase 5: Aluguéis",
-    description: "Frontend (Yan)",
-    tasks: [
-      { id: "f-5-1", title: "Listagem de imóveis + filtros", completed: false },
-      { id: "f-5-2", title: "Página do imóvel + Agendar visita", completed: false },
-      { id: "f-5-3", title: "Upload de documentos", completed: false },
+      { id: "f-3-1", title: "Home (Busca, Categorias, Cards)", completed: false },
+      { id: "f-3-2", title: "Página Restaurantes (Detalhes, Produtos)", completed: false },
+      { id: "f-3-3", title: "Carrinho, Checkout e Histórico", completed: false },
+      { id: "f-3-4", title: "Autenticação (Login, Registro)", completed: false },
+      { id: "f-3-5", title: "Responsividade e Interações", completed: false },
     ],
   },
   {
     id: 6,
-    title: "Fase 6: Loja",
-    description: "Frontend (Yan)",
+    title: "Fase 6-F: Integrações UI",
+    description: "Aguardando",
+    status: "waiting",
     tasks: [
-      { id: "f-6-1", title: "Grid de produtos + Filtro", completed: false },
-      { id: "f-6-2", title: "Carrinho + Checkout", completed: false },
-      { id: "f-6-3", title: "Painel do comprador", completed: false },
+      { id: "f-6-1", title: "Mapas Interativos (Leaflet)", completed: false },
+      { id: "f-6-2", title: "Feedback Visual de Pagamento", completed: false },
     ],
   },
   {
     id: 7,
-    title: "Fase 7: Blog",
-    description: "Frontend (Yan)",
+    title: "Fase 7-F: Testes Frontend",
+    description: "Aguardando",
+    status: "waiting",
     tasks: [
-      { id: "f-7-1", title: "Página /blog", completed: false },
-      { id: "f-7-2", title: "Página do artigo + Relacionados", completed: false },
+      { id: "f-7-1", title: "Testes Manuais (Cross-Browser)", completed: false },
+      { id: "f-7-2", title: "Performance (Lighthouse)", completed: false },
+    ],
+  },
+];
+
+const initialBackendPhases: Phase[] = [
+  {
+    id: 4,
+    title: "Fase 4: Desenvolvimento Backend",
+    description: "Em Progresso (40%)",
+    status: "in-progress",
+    tasks: [
+      { id: "b-4-1", title: "Setup (GitHub, Docker, Linter)", completed: true },
+      { id: "b-4-2", title: "API Autenticação (JWT)", completed: false },
+      { id: "b-4-3", title: "API Produtos e Restaurantes (CRUD)", completed: false },
+      { id: "b-4-4", title: "Lógica de Frete e Estoque", completed: false },
+      { id: "b-4-5", title: "Segurança e Proteção de Rotas", completed: false },
     ],
   },
   {
-    id: 8,
-    title: "Fase 8: Mapa da Colônia",
-    description: "Frontend (Yan)",
+    id: 5,
+    title: "Fase 5: Banco de Dados",
+    description: "Aguardando",
+    status: "waiting",
     tasks: [
-      { id: "f-8-1", title: "Criar mapa (Leaflet)", completed: false },
-      { id: "f-8-2", title: "Clusters + Tooltip", completed: false },
-      { id: "f-8-3", title: "Click → página do módulo", completed: false },
+      { id: "b-5-1", title: "Modelagem (Users, Products, Orders)", completed: false },
+      { id: "b-5-2", title: "Consultas e Migrations", completed: false },
+      { id: "b-5-3", title: "Backup e Escalabilidade", completed: false },
     ],
   },
   {
-    id: 9,
-    title: "Fase 9: Utilidades em Tempo Real",
-    description: "Frontend (Yan)",
+    id: 6,
+    title: "Fase 6-B: Integrações API",
+    description: "Aguardando",
+    status: "waiting",
     tasks: [
-      { id: "f-9-1", title: "Tela da Ponte da Amizade", completed: false },
-      { id: "f-9-2", title: "Tela do Câmbio com gráfico 7 dias", completed: false },
+      { id: "b-6-1", title: "Gateway de Pagamento (PIX)", completed: false },
+      { id: "b-6-2", title: "Serviço de Geolocalização", completed: false },
+      { id: "b-6-3", title: "Serviço de Notificações (Email)", completed: false },
     ],
   },
 ];
@@ -297,20 +188,19 @@ const initialMvpPhases: Phase[] = [
 ];
 
 const Index = () => {
-  // Separate states for modular management
-  const [commonPhases, setCommonPhases] = useState<Phase[]>(() => {
-    const saved = localStorage.getItem("brazukas-common-phases");
-    return saved ? JSON.parse(saved) : initialCommonPhases;
-  });
-
-  const [backendPhases, setBackendPhases] = useState<Phase[]>(() => {
-    const saved = localStorage.getItem("brazukas-backend-phases");
-    return saved ? JSON.parse(saved) : initialBackendPhases;
+  const [generalPhases, setGeneralPhases] = useState<Phase[]>(() => {
+    const saved = localStorage.getItem("brazukas-phases-general");
+    return saved ? JSON.parse(saved) : initialGeneralPhases;
   });
 
   const [frontendPhases, setFrontendPhases] = useState<Phase[]>(() => {
-    const saved = localStorage.getItem("brazukas-frontend-phases");
+    const saved = localStorage.getItem("brazukas-phases-frontend");
     return saved ? JSON.parse(saved) : initialFrontendPhases;
+  });
+
+  const [backendPhases, setBackendPhases] = useState<Phase[]>(() => {
+    const saved = localStorage.getItem("brazukas-phases-backend");
+    return saved ? JSON.parse(saved) : initialBackendPhases;
   });
 
   const [mvpPhases, setMvpPhases] = useState<Phase[]>(() => {
@@ -318,13 +208,11 @@ const Index = () => {
     return saved ? JSON.parse(saved) : initialMvpPhases;
   });
 
-  // Effects for persistence
-  useEffect(() => localStorage.setItem("brazukas-common-phases", JSON.stringify(commonPhases)), [commonPhases]);
-  useEffect(() => localStorage.setItem("brazukas-backend-phases", JSON.stringify(backendPhases)), [backendPhases]);
-  useEffect(() => localStorage.setItem("brazukas-frontend-phases", JSON.stringify(frontendPhases)), [frontendPhases]);
+  useEffect(() => localStorage.setItem("brazukas-phases-general", JSON.stringify(generalPhases)), [generalPhases]);
+  useEffect(() => localStorage.setItem("brazukas-phases-frontend", JSON.stringify(frontendPhases)), [frontendPhases]);
+  useEffect(() => localStorage.setItem("brazukas-phases-backend", JSON.stringify(backendPhases)), [backendPhases]);
   useEffect(() => localStorage.setItem("brazukas-mvp-phases", JSON.stringify(mvpPhases)), [mvpPhases]);
 
-  // Unified toggle handler factory
   const createToggleHandler = (setter: React.Dispatch<React.SetStateAction<Phase[]>>) =>
     (phaseId: number, taskId: string) => {
       setter(prev =>
@@ -343,7 +231,7 @@ const Index = () => {
   };
 
   const totalMasterProgress = () => {
-    const allTasks = [...commonPhases, ...backendPhases, ...frontendPhases].flatMap(p => p.tasks);
+    const allTasks = [...generalPhases, ...frontendPhases, ...backendPhases].flatMap(p => p.tasks);
     return calculateProgress(allTasks);
   };
 
@@ -354,14 +242,14 @@ const Index = () => {
       <ProjectHeader totalProgress={totalMasterProgress()} />
 
       <main className="container mx-auto px-4 py-8 space-y-8">
-        <Tabs defaultValue="master-backend" className="w-full">
+        <Tabs defaultValue="frontend" className="w-full">
           <div className="flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
             <div className="overflow-x-auto w-full md:w-auto">
               <TabsList>
-                <TabsTrigger value="master-common">Geral</TabsTrigger>
-                <TabsTrigger value="master-backend">Backend</TabsTrigger>
-                <TabsTrigger value="master-frontend">Frontend</TabsTrigger>
-                <TabsTrigger value="mvp-tracking" className="text-blue-600 data-[state=active]:text-blue-700">MVP (29/12)</TabsTrigger>
+                <TabsTrigger value="general">Geral</TabsTrigger>
+                <TabsTrigger value="frontend">Frontend</TabsTrigger>
+                <TabsTrigger value="backend">Backend</TabsTrigger>
+                <TabsTrigger value="mvp-tracking" className="text-blue-600 data-[state=active]:text-blue-700">Sprint MVP (29/12)</TabsTrigger>
               </TabsList>
             </div>
 
@@ -383,37 +271,28 @@ const Index = () => {
             </div>
           </div>
 
-          <TabsContent value="master-common" className="space-y-6 animate-in fade-in-50 duration-500">
-            <h2 className="text-2xl font-bold tracking-tight">Fase 0: Organização & Base</h2>
+          <TabsContent value="general" className="space-y-6 animate-in fade-in-50 duration-500">
+            <h2 className="text-2xl font-bold tracking-tight">Planejamento & Deploy</h2>
             <div className="grid md:grid-cols-2 gap-6">
-              {commonPhases.map(phase => (
+              {generalPhases.map(phase => (
                 <PhaseCard
                   key={phase.id}
                   phase={phase}
                   progress={calculateProgress(phase.tasks)}
-                  onTaskToggle={createToggleHandler(setCommonPhases)}
+                  onTaskToggle={createToggleHandler(setGeneralPhases)}
                 />
               ))}
             </div>
             <ScopeChangeNote />
           </TabsContent>
 
-          <TabsContent value="master-backend" className="space-y-6 animate-in fade-in-50 duration-500">
-            <h2 className="text-2xl font-bold tracking-tight text-indigo-600">Back-End Roadmap (Thálisson)</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              {backendPhases.map(phase => (
-                <PhaseCard
-                  key={phase.id}
-                  phase={phase}
-                  progress={calculateProgress(phase.tasks)}
-                  onTaskToggle={createToggleHandler(setBackendPhases)}
-                />
-              ))}
+          <TabsContent value="frontend" className="space-y-6 animate-in fade-in-50 duration-500">
+            <div className="flex items-center justify-between">
+              <h2 className="text-2xl font-bold tracking-tight text-pink-600">Frontend Roadmap</h2>
+              <div className="text-sm text-muted-foreground">
+                Foco: <span className="font-semibold text-primary">Fase 3 - Visual / Interação</span>
+              </div>
             </div>
-          </TabsContent>
-
-          <TabsContent value="master-frontend" className="space-y-6 animate-in fade-in-50 duration-500">
-            <h2 className="text-2xl font-bold tracking-tight text-pink-600">Front-End Roadmap (Yan)</h2>
             <div className="grid md:grid-cols-2 gap-6">
               {frontendPhases.map(phase => (
                 <PhaseCard
@@ -421,6 +300,25 @@ const Index = () => {
                   phase={phase}
                   progress={calculateProgress(phase.tasks)}
                   onTaskToggle={createToggleHandler(setFrontendPhases)}
+                />
+              ))}
+            </div>
+          </TabsContent>
+
+          <TabsContent value="backend" className="space-y-6 animate-in fade-in-50 duration-500">
+            <div className="flex items-center justify-between">
+              <h2 className="text-2xl font-bold tracking-tight text-indigo-600">Backend Roadmap</h2>
+              <div className="text-sm text-muted-foreground">
+                Foco: <span className="font-semibold text-primary">Fase 4 - API / Regras</span>
+              </div>
+            </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              {backendPhases.map(phase => (
+                <PhaseCard
+                  key={phase.id}
+                  phase={phase}
+                  progress={calculateProgress(phase.tasks)}
+                  onTaskToggle={createToggleHandler(setBackendPhases)}
                 />
               ))}
             </div>
@@ -434,7 +332,7 @@ const Index = () => {
                   Sprint MVP: Rastreamento em Tempo Real
                 </p>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Deadline Imadiato: 29/12 | Foco na Fase 3 do Master
+                  Deadline Imediato: 29/12 | Foco na Fase 3 do Master
                 </p>
                 <div className="mt-2 w-full bg-blue-200/20 rounded-full h-1.5 overflow-hidden">
                   <div
