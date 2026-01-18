@@ -1,47 +1,25 @@
-# Roadmap Backend (Brazukas Delivery)
+# Roadmap Backend - Brazukas Delivery
 
-Responsável: Thálisson
-Foco: API, Banco de Dados, Regras de Negócio.
+**Proprietário**: Thálisson
+**Stack**: Node.js + Express + PostgreSQL + Docker
 
-## Fase 1: Planejamento Técnico
+### Concluído (Fase 4)
 
-- [x] **Arquitetura**: Definição de Monorepo, Docker e Stack (Node/Express).
-- [x] **Modelagem de Dados Inicial** (Diagrama ER).
+- [x] Setup do Ambiente (Docker Compose).
+- [x] Configuração da API Express.
+- [x] Seed de Dados (Lojas e Produtos).
+- [x] API de Listagem de Restaurantes.
+- [x] API de Consulta de Cardápio por Loja.
 
-## Fase 4: Desenvolvimento Backend (🏗️ Foco)
+### Em Desenvolvimento (Fase 4 & 5)
 
-- [x] **Setup**: Configuração do Server, TS, Linter, Docker.
-- [ ] **API de Autenticação**:
-  - [ ] Login (JWT).
-  - [ ] Registro (Hash de Senha).
-  - [ ] Middleware de Proteção.
-- [ ] **API de Restaurantes/Produtos**:
-  - [ ] CRUD Básico.
-  - [ ] Upload de Imagens (Mock/S3).
-- [ ] **API de Pedidos**:
-  - [ ] Criação de Pedido.
-  - [ ] Atualização de Status.
+- [ ] **Autenticação**: Endpoints de Registro e Login (JWT).
+- [ ] **Database**: Migrações para Tabelas de Usuários e Pedidos.
+- [ ] **Orders**: Lógica de criação de pedidos e mudança de status.
+- [ ] **Realtime**: Configurações iniciais de Websockets para tracking.
 
-## Fase 5: Banco de Dados (⚪ Aguardando)
+### Próximas Etapas
 
-- [ ] **Migrations**: Drizzle ORM Setup.
-- [ ] **Schemas**:
-  - [ ] `users` (clientes, entregadores, admins).
-  - [ ] `restaurants`, `products`, `categories`.
-  - [ ] `orders`, `order_items`.
-- [ ] **Seeds**: Dados iniciais para teste.
-
-## Fase 6: Integrações Backend (⚪ Aguardando)
-
-- [ ] **Pagamentos**: Integração PIX (QRCode).
-- [ ] **Geolocalização**: Endpoint de atualização de coords.
-
-## Fase 7: Testes Backend (⚪ Aguardando)
-
-- [ ] Testes Unitários (Jest).
-- [ ] Testes de Carga (K6).
-
-## Fase 8: Deploy Backend (⚪ Aguardando)
-
-- [ ] Dockerfile Multistage.
-- [ ] Deploy em VPS/Render.
+- [ ] API de Geolocalização (Cálculo de Entrega).
+- [ ] Integração com Gateway de Pagamento.
+- [ ] Documentação Swagger/OpenAPI.

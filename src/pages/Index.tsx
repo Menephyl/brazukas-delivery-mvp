@@ -62,45 +62,37 @@ const initialFrontendPhases: Phase[] = [
   {
     id: 2,
     title: "Fase 2: Design UI/UX",
-    description: "Concluída (90%)",
+    description: "Concluída (95%)",
     status: "done",
     tasks: [
       { id: "f-2-1", title: "Wireframes (Home, Carrinho, Login)", completed: true },
       { id: "f-2-2", title: "Identidade Visual e Acessibilidade", completed: true },
-      { id: "f-2-3", title: "Protótipos Interativos", completed: true },
+      { id: "f-2-3", title: "Protótipos Interativos (Wouter)", completed: true },
     ],
   },
   {
     id: 3,
     title: "Fase 3: Desenvolvimento Frontend",
-    description: "Foco Imediato",
-    status: "pending",
+    description: "Em Desenvolvimento (70%)",
+    status: "in-progress",
     tasks: [
-      { id: "f-3-1", title: "Home (Busca, Categorias, Cards)", completed: false },
-      { id: "f-3-2", title: "Página Restaurantes (Detalhes, Produtos)", completed: false },
-      { id: "f-3-3", title: "Carrinho, Checkout e Histórico", completed: false },
-      { id: "f-3-4", title: "Autenticação (Login, Registro)", completed: false },
-      { id: "f-3-5", title: "Responsividade e Interações", completed: false },
+      { id: "f-3-1", title: "Home (Busca, Categorias, Cards)", completed: true },
+      { id: "f-3-2", title: "Página Restaurantes (Listagem e Detalhes)", completed: true },
+      { id: "f-3-3", title: "Sidebar de Carrinho", completed: true },
+      { id: "f-3-4", title: "Interface de Autenticação (Modais)", completed: true },
+      { id: "f-3-5", title: "Checkout e Confirmação de Pedido", completed: false },
     ],
   },
   {
     id: 6,
-    title: "Fase 6-F: Integrações UI",
-    description: "Aguardando",
-    status: "waiting",
+    title: "Fase 6-F: Delivery & Tracking (UI)",
+    description: "Próximas Etapas",
+    status: "pending",
     tasks: [
-      { id: "f-6-1", title: "Mapas Interativos (Leaflet)", completed: false },
-      { id: "f-6-2", title: "Feedback Visual de Pagamento", completed: false },
-    ],
-  },
-  {
-    id: 7,
-    title: "Fase 7-F: Testes Frontend",
-    description: "Aguardando",
-    status: "waiting",
-    tasks: [
-      { id: "f-7-1", title: "Testes Manuais (Cross-Browser)", completed: false },
-      { id: "f-7-2", title: "Performance (Lighthouse)", completed: false },
+      { id: "f-6-1", title: "Rastreamento em Tempo Real (Mapa Leaflet)", completed: false },
+      { id: "f-6-2", title: "Push Notifications de Status", completed: false },
+      { id: "f-6-3", title: "Página de Histórico do Cliente", completed: false },
+      { id: "f-6-4", title: "Interface do Entregador (PWA)", completed: false },
     ],
   },
 ];
@@ -109,36 +101,36 @@ const initialBackendPhases: Phase[] = [
   {
     id: 4,
     title: "Fase 4: Desenvolvimento Backend",
-    description: "Em Progresso (40%)",
+    description: "Em Progresso (50%)",
     status: "in-progress",
     tasks: [
-      { id: "b-4-1", title: "Setup (GitHub, Docker, Linter)", completed: true },
-      { id: "b-4-2", title: "API Autenticação (JWT)", completed: false },
-      { id: "b-4-3", title: "API Produtos e Restaurantes (CRUD)", completed: false },
-      { id: "b-4-4", title: "Lógica de Frete e Estoque", completed: false },
-      { id: "b-4-5", title: "Segurança e Proteção de Rotas", completed: false },
+      { id: "b-4-1", title: "Setup (GitHub, Docker, Express)", completed: true },
+      { id: "b-4-2", title: "Database Seeding (Lojas e Produtos)", completed: true },
+      { id: "b-4-3", title: "API CRUD Lojas/Restaurantes", completed: true },
+      { id: "b-4-4", title: "Lógica de Autenticação JWT", completed: false },
+      { id: "b-4-5", title: "Gestão de Pedidos (Order Flow)", completed: false },
     ],
   },
   {
     id: 5,
     title: "Fase 5: Banco de Dados",
-    description: "Aguardando",
-    status: "waiting",
+    description: "Em Modelagem",
+    status: "in-progress",
     tasks: [
-      { id: "b-5-1", title: "Modelagem (Users, Products, Orders)", completed: false },
-      { id: "b-5-2", title: "Consultas e Migrations", completed: false },
-      { id: "b-5-3", title: "Backup e Escalabilidade", completed: false },
+      { id: "b-5-1", title: "Modelagem PostgreSQL (Lojas e Produtos)", completed: true },
+      { id: "b-5-2", title: "Tabelas de Usuários e Perfis", completed: false },
+      { id: "b-5-3", title: "Tabelas de Pedidos e Rastreamento", completed: false },
     ],
   },
   {
     id: 6,
-    title: "Fase 6-B: Integrações API",
+    title: "Fase 6-B: Delivery & Tracking (API)",
     description: "Aguardando",
     status: "waiting",
     tasks: [
-      { id: "b-6-1", title: "Gateway de Pagamento (PIX)", completed: false },
-      { id: "b-6-2", title: "Serviço de Geolocalização", completed: false },
-      { id: "b-6-3", title: "Serviço de Notificações (Email)", completed: false },
+      { id: "b-6-1", title: "Websockets para Rastreamento Realtime", completed: false },
+      { id: "b-6-2", title: "Integração Geolocalização (PostGIS/Distance)", completed: false },
+      { id: "b-6-3", title: "Gateway de Pagamento (Mock/PIX)", completed: false },
     ],
   },
 ];
@@ -146,43 +138,42 @@ const initialBackendPhases: Phase[] = [
 const initialMvpPhases: Phase[] = [
   {
     id: 1,
-    title: "Passo 1: Banco de Dados",
-    description: "Drizzle + Supabase",
+    title: "Mockups e Protótipos",
+    description: "Design e Wireframes",
     tasks: [
-      { id: "mvp-1-1", title: "Tabela orders (id, status, driver_id, location)", completed: false },
-      { id: "mvp-1-2", title: "Tabela order_items e order_tracking", completed: false },
-      { id: "mvp-1-3", title: "Habilitar Realtime no Supabase Dashboard", completed: false },
+      { id: "mock-1", title: "Mockup do Header (Lojista/Entregador)", completed: true },
+      { id: "mock-2", title: "Mockup de Rastreamento (Mapa)", completed: true },
+      { id: "mock-3", title: "Mockup do App do Entregador", completed: true },
     ],
   },
   {
     id: 2,
-    title: "Passo 2: Backend (Fase 3 Core)",
-    description: "Migração tRPC & Lógica",
+    title: "Passo 1: Banco de Dados",
+    description: "PostgreSQL + Docker",
     tasks: [
-      { id: "mvp-2-1", title: "Refatorar tRPC orders.create (usar Drizzle)", completed: false },
-      { id: "mvp-2-2", title: "Endpoint updateStatus e updateLocation", completed: false },
-      { id: "mvp-2-3", title: "Remover mocks em memória", completed: false },
+      { id: "mvp-1-1", title: "Tabela lojas (id, nome, status, local)", completed: true },
+      { id: "mvp-1-2", title: "Tabela produtos e categorias", completed: true },
+      { id: "mvp-1-3", title: "Setup Docker Compose DB", completed: true },
     ],
   },
   {
     id: 3,
-    title: "Passo 3: App do Entregador",
-    description: "Funcionalidade Real",
+    title: "Passo 2: Backend (Order Flow)",
+    description: "Express & Logica",
     tasks: [
-      { id: "mvp-3-1", title: "Login e Proteção de Rota (Driver)", completed: false },
-      { id: "mvp-3-2", title: "Listar Pedidos 'ASSIGNED'", completed: false },
-      { id: "mvp-3-3", title: "Capturar Geolocation (watchPosition)", completed: false },
-      { id: "mvp-3-4", title: "Enviar updates para Supabase", completed: false },
+      { id: "mvp-2-1", title: "Endpoint de criação de pedido", completed: false },
+      { id: "mvp-2-2", title: "Sistema de mudança de status (Wait -> Picking -> Shipping)", completed: false },
+      { id: "mvp-2-3", title: "Integração Realtime (Socket.io)", completed: false },
     ],
   },
   {
     id: 4,
-    title: "Passo 4: Cliente",
-    description: "Integração Realtime",
+    title: "Passo 3: App do Entregador",
+    description: "Funcionalidade Real",
     tasks: [
-      { id: "mvp-4-1", title: "Substituir Polling por Supabase Channel", completed: false },
-      { id: "mvp-4-2", title: "Atualizar TrackingMap via Socket", completed: false },
-      { id: "mvp-4-3", title: "Feedback visual de status", completed: false },
+      { id: "mvp-3-1", title: "Interface de aceite de corrida", completed: false },
+      { id: "mvp-3-2", title: "API de atualização de geolocalização", completed: false },
+      { id: "mvp-3-3", title: "Finalização de pedido via app", completed: false },
     ],
   },
 ];
@@ -213,8 +204,21 @@ const Index = () => {
   useEffect(() => localStorage.setItem("brazukas-phases-backend", JSON.stringify(backendPhases)), [backendPhases]);
   useEffect(() => localStorage.setItem("brazukas-mvp-phases", JSON.stringify(mvpPhases)), [mvpPhases]);
 
-  const createToggleHandler = (setter: React.Dispatch<React.SetStateAction<Phase[]>>) =>
+  const handleToggleWithPassword = (setter: React.Dispatch<React.SetStateAction<Phase[]>>) =>
     (phaseId: number, taskId: string) => {
+      const password = prompt("Digite a senha de administrador para alterar o status:");
+
+      if (!password) return;
+
+      if (password === "yan123") {
+        alert("Olá Yan! Atualizando o progresso...");
+      } else if (password === "thalisson123") {
+        alert("Olá Thálisson! Atualizando o progresso...");
+      } else {
+        alert("Senha incorreta!");
+        return;
+      }
+
       setter(prev =>
         prev.map(p =>
           p.id === phaseId
@@ -279,7 +283,7 @@ const Index = () => {
                   key={phase.id}
                   phase={phase}
                   progress={calculateProgress(phase.tasks)}
-                  onTaskToggle={createToggleHandler(setGeneralPhases)}
+                  onTaskToggle={handleToggleWithPassword(setGeneralPhases)}
                 />
               ))}
             </div>
@@ -299,7 +303,7 @@ const Index = () => {
                   key={phase.id}
                   phase={phase}
                   progress={calculateProgress(phase.tasks)}
-                  onTaskToggle={createToggleHandler(setFrontendPhases)}
+                  onTaskToggle={handleToggleWithPassword(setFrontendPhases)}
                 />
               ))}
             </div>
@@ -318,7 +322,7 @@ const Index = () => {
                   key={phase.id}
                   phase={phase}
                   progress={calculateProgress(phase.tasks)}
-                  onTaskToggle={createToggleHandler(setBackendPhases)}
+                  onTaskToggle={handleToggleWithPassword(setBackendPhases)}
                 />
               ))}
             </div>
@@ -362,7 +366,7 @@ const Index = () => {
                   key={phase.id}
                   phase={phase}
                   progress={calculateProgress(phase.tasks)}
-                  onTaskToggle={createToggleHandler(setMvpPhases)}
+                  onTaskToggle={handleToggleWithPassword(setMvpPhases)}
                 />
               ))}
             </div>

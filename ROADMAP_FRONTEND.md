@@ -1,49 +1,27 @@
-# Roadmap Frontend (Brazukas Delivery)
+# Roadmap Frontend - Brazukas Delivery
 
-Responsável: Yan
-Foco: Interface, UX, Integração Client-side.
+**Proprietário**: Yan
+**Stack**: React 19 + Vite + Tailwind CSS + Wouter
 
-## Fase 1: Planejamento UI
+### Concluído (Fase 2 & Parte da Fase 3)
 
-- [x] **Definir Escopo Visual**:
-  - [x] Home: Categorias, Destaques, Cards.
-  - [x] Restaurantes: Listagem, Filtros, Detalhes.
-  - [x] Carrinho: Sidebar, Checkout.
-- [x] **Wireframes e Personas**.
+- [x] Wireframes e Design UI/UX.
+- [x] Estrutura Inicial (Vite + Monorepo).
+- [x] Página Home (Discovery).
+- [x] Página de Restaurantes (Grid de Lojas).
+- [x] Página de Detalhes da Loja (Menu de Produtos).
+- [x] Sidebar de Carrinho Funcional.
 
-## Fase 2: Design UI/UX (✅ 90%)
+### Em Desenvolvimento (Fase 3 & 6)
 
-- [x] **Identidade Visual**: Temática Brazukas (Verde/Amarelo/Azul).
-- [x] **Componentes**: ShadcnUI + Tailwind configurados.
-- [x] **Acessibilidade Base**.
+- [ ] **Autenticação**: Integrar modais com backend.
+- [ ] **Checkout**: Página de revisão de pedido e forma de pagamento.
+- [ ] **Tracking**: Visualização do mapa com localização do entregador (Leaflet).
+- [ ] **History**: Lista de pedidos anteriores do cliente.
+- [ ] **Driver UI**: Interface simplificada para o entregador aceitar corridas.
 
-## Fase 3: Desenvolvimento Frontend (🏗️ Foco)
+### Próximas Etapas
 
-- [ ] **Home Page**:
-  - [ ] Implementar Header com Busca e Localização.
-  - [ ] Carrossel de Categorias e Destaques.
-  - [ ] Grid de Restaurantes.
-- [ ] **Página de Restaurante**:
-  - [ ] Header do Restaurante (Infos).
-  - [ ] Lista de Produtos por Categoria.
-  - [ ] Modal de Produto (Adicionais/Obs).
-- [ ] **Carrinho e Checkout**:
-  - [ ] Gerenciamento de Estado (Zustand/Context).
-  - [ ] Seleção de Pagamento (Visual).
-- [ ] **Autenticação**:
-  - [ ] Telas de Login e Registro.
-
-## Fase 6: Integrações UI (⚪ Aguardando)
-
-- [ ] **Mapas**: Leaflet para endereço e rastreamento.
-- [ ] **Comunicação**: Feedback visual de status (Toasts).
-
-## Fase 7: Testes Frontend (⚪ Aguardando)
-
-- [ ] Testes de Fluxo (Cypress/Playwright).
-- [ ] Testes Manuais Mobile.
-
-## Fase 8: Deploy Frontend (⚪ Aguardando)
-
-- [ ] Build Otimizado.
-- [ ] Deploy na Vercel/Netlify.
+- [ ] Responsividade Mobile-First (Refinamento).
+- [ ] Micro-animações (Framer Motion).
+- [ ] Testes de Integração.

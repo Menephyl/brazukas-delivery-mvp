@@ -1,88 +1,51 @@
-# Roadmap Master (Estrutura Separada)
+# Roadmap Master - Brazukas Delivery MVP
 
-Roadmap organizado por área de responsabilidade (Geral, Backend, Frontend).
+Status: Monorepo em desenvolvimento (Frontend & Backend).
 
 ## 🌍 GERAL (Planejamento & Releases)
 
-Tarefas compartilhadas ou de gerenciamento.
-
-### Fase 1: Planejamento e Requisitos (✅ 100%)
-
-- [x] **Definição de Escopo**:
-  - [x] Funcionalidades da Home (Categorias, Destaques).
-  - [x] Funcionalidades de Restaurantes (Busca, Filtros).
-  - [x] Globais (Dark mode, Carrinho).
-- [x] **Personas**: Definição de stories para Cliente, Entregador, Admin.
-
-### Fase 8: Deploy e Lançamento (⚪ Aguardando)
-
-- [ ] **Infraestrutura**: Configurar ambientes Dev/Staging/Prod.
-- [ ] **Hospedagem**: Vercel (Front) e Render/VPS (Back).
-- [ ] **CI/CD**: Pipelines de automação.
-
-### Fase 9: Manutenção (⚪ Futuro)
-
-- [ ] Monitoramento, SEO e Analytics.
+- [x] **Fase 1: Planejamento e Requisitos** (✅ 100%)
+  - [x] Definição de Escopo e Personas.
+  - [x] Listagem de Features (MVP).
+- [ ] **Fase 8: Deploy e Lançamento** (⚪ Aguardando)
+  - [ ] Infraestrutura Docker (Front/Back/DB).
+  - [ ] CI/CD Pipelines.
+- [ ] **Fase 9: Manutenção** (⚪ Futuro)
 
 ---
 
 ## 🎨 FRONTEND (Yan)
 
-Foco: Interface, UX, Integração Client-side.
+**Stack**: React 19, Vite, Tailwind, Wouter.
 
-### Fase 2: Design UI/UX (✅ 90%)
-
-- [x] **Wireframes & Protótipos**: Mobile-first, Temática Brazukas.
-- [x] **Acessibilidade**: Contraste e leitores de tela.
-
-### Fase 3: Desenvolvimento Frontend (🏗️ Foco Imediato)
-
-- [ ] **Páginas Visuais**:
-  - [ ] Home completa (Busca, Categorias, Cards).
-  - [ ] Detalhes do Restaurante e Produtos.
-  - [ ] Carrinho e Checkout Visual.
-  - [ ] Telas de Auth (Login/Register).
-- [ ] **Lógica Client-Side**:
-  - [ ] Gerenciamento de Estado (Carrinho).
-  - [ ] Validação de Formulários.
-  - [ ] Integração com APIs.
-
-### Fase 6-F: Integrações Frontend (⚪ Aguardando)
-
-- [ ] **Mapas**: Exibição de mapa interativo (Leaflet).
-- [ ] **Notificações**: Toasts e tratamento de mensagens realtime.
-
-### Fase 7-F: Testes Frontend (⚪ Aguardando)
-
-- [ ] Testes Manuais (Cross-browser).
-- [ ] Testes de Componentes (Jest/Vitest).
+- [x] **Fase 2: Design UI/UX** (✅ 95%)
+  - [x] Wireframes e Protótipos Interativos.
+- [ ] **Fase 3: Desenvolvimento Frontend** (🏗️ 70%)
+  - [x] Home, Busca e Categorias.
+  - [x] Listagem de Restaurantes e Detalhes (Produtos).
+  - [x] Carrinho (Sidebar).
+  - [x] UI de Autenticação (Modais).
+  - [ ] **Checkout e Finalização**.
+- [ ] **Fase 6-F: Delivery & Tracking (UI)** (⚪ Próximas Etapas)
+  - [ ] Rastreamento em Tempo Real (Mapa Leaflet).
+  - [ ] Notificações de Status do Pedido.
+  - [ ] App do Entregador (Interface PWA).
 
 ---
 
 ## ⚙️ BACKEND (Thálisson)
 
-Foco: API, Dados, Regras de Negócio.
+**Stack**: Node.js, Express, PostgreSQL, Docker.
 
-### Fase 4: Desenvolvimento Backend (🟡 40%)
-
-- [x] **Setup**: GitHub, Docker, Linter.
-- [ ] **APIs Core**:
-  - [ ] Autenticação (JWT, Session).
-  - [ ] CRUD Produtos/Restaurantes.
-  - [ ] Pedidos (Status flow).
-- [ ] **Regras de Negócio**: Frete, Estoque.
-
-### Fase 5: Banco de Dados (⚪ Aguardando)
-
-- [ ] **Modelagem**: Schemas (Users, Orders, Products, Tracking).
-- [ ] **Migrations e Queries Otimizadas**.
-
-### Fase 6-B: Integrações Backend (⚪ Aguardando)
-
-- [ ] **Pagamentos**: Gateway PIX/Cartão.
-- [ ] **Geolocalização**: Cálculos de distância e Rota.
-- [ ] **Mensageria**: Email/SMS.
-
-### Fase 7-B: Testes Backend (⚪ Aguardando)
-
-- [ ] Testes Unitários e Integração de API.
+- [x] **Fase 4: Desenvolvimento Backend** (🟡 50%)
+  - [x] Setup Monorepo (Docker/Express).
+  - [x] Database Seeding (Lojas/Produtos).
+  - [x] CRUD Lojas e Restaurantes.
+  - [ ] **Autenticação JWT**.
+  - [ ] **Sistema de Pedidos (Flow)**.
+- [ ] **Fase 5: Banco de Dados** (🏗️ In-Progress)
+  - [x] Modelagem Lojas e Produtos.
+  - [ ] Tabelas de Usuários e Pedidos.
+- [ ] **Fase 6-B: Delivery & Tracking (API)** (⚪ Aguardando)
+  - [ ] Websockets para Tempo Real.
+  - [ ] Integração de Geolocalização.
