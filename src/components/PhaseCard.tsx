@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 interface Task {
   id: string;
@@ -20,9 +21,10 @@ interface PhaseCardProps {
   phase: Phase;
   progress: number;
   onTaskToggle: (phaseId: number, taskId: string) => void;
+  className?: string;
 }
 
-export const PhaseCard = ({ phase, progress, onTaskToggle }: PhaseCardProps) => {
+export const PhaseCard = ({ phase, progress, onTaskToggle, className }: PhaseCardProps) => {
   const getProgressColor = (progress: number) => {
     if (progress === 0) return "text-muted-foreground";
     if (progress < 50) return "text-destructive";
@@ -41,7 +43,7 @@ export const PhaseCard = ({ phase, progress, onTaskToggle }: PhaseCardProps) => 
   };
 
   return (
-    <Card className="transition-all hover:shadow-lg border-2">
+    <Card className={cn("transition-all hover:shadow-lg border-2", className)}>
       <CardHeader>
         <div className="flex items-start justify-between mb-2">
           <Badge variant="outline" className={getPhaseColor(phase.id)}>
@@ -51,8 +53,8 @@ export const PhaseCard = ({ phase, progress, onTaskToggle }: PhaseCardProps) => 
             {progress}%
           </span>
         </div>
-        <CardTitle className="text-xl">{phase.title}</CardTitle>
-        <CardDescription className="text-base">{phase.description}</CardDescription>
+        <CardTitle className="text-xl text-white">{phase.title}</CardTitle>
+        <CardDescription className="text-base text-slate-400">{phase.description}</CardDescription>
         <Progress value={progress} className="mt-3 h-2" />
       </CardHeader>
       <CardContent>
@@ -60,19 +62,18 @@ export const PhaseCard = ({ phase, progress, onTaskToggle }: PhaseCardProps) => 
           {phase.tasks.map(task => (
             <div
               key={task.id}
-              className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors"
+              className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors"
             >
               <Checkbox
                 id={task.id}
                 checked={task.completed}
                 onCheckedChange={() => onTaskToggle(phase.id, task.id)}
-                className="mt-0.5"
+                className="mt-0.5 border-white/20 data-[state=checked]:bg-emerald-500 data-[state=checked]:text-white"
               />
               <label
                 htmlFor={task.id}
-                className={`text-sm flex-1 cursor-pointer ${
-                  task.completed ? "line-through text-muted-foreground" : "text-foreground"
-                }`}
+                className={`text-sm flex-1 cursor-pointer ${task.completed ? "line-through text-slate-500" : "text-slate-300"
+                  }`}
               >
                 {task.title}
               </label>

@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
-import { ProjectHeader } from "@/components/ProjectHeader";
 import { PhaseCard } from "@/components/PhaseCard";
 import { CompetitorAnalysis } from "@/components/CompetitorAnalysis";
 import { ScopeChangeNote } from "@/components/ScopeChangeNote";
 import { HeaderMockup } from "@/components/HeaderMockup";
 import { TrackingMockup } from "@/components/TrackingMockup";
 import { DriverAppMockup } from "@/components/DriverAppMockup";
-import { AlertCircle, Rocket } from "lucide-react";
+import { AlertCircle, Rocket, Package } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ProgressTracker } from "@/components/dashboard/ProgressTracker";
+import { SystemHealthMonitor } from "@/components/dashboard/SystemHealthMonitor";
+import { LogIntegracao } from "@/components/dashboard/LogIntegracao";
 
 interface Task {
   id: string;
@@ -31,8 +33,8 @@ const initialGeneralPhases: Phase[] = [
     status: "done",
     tasks: [
       { id: "g-1-1", title: "Definir Escopo: Funcionalidades Home/Restaurantes", completed: true },
-      { id: "g-1-2", title: "Definir Personas (Cliente, Entregador, Admin)", completed: true },
-      { id: "g-1-3", title: "Listar Features Chave (Login, Busca, Carrinho)", completed: true },
+      { id: "g-1-2", title: "Definir Personas (Cliente, Entregador, Admin, Lojista)", completed: true },
+      { id: "g-1-3", title: "Listar Features Chave (Login, Busca, Carrinho, Histórico, Notificações)", completed: true },
     ],
   },
   {
@@ -42,8 +44,7 @@ const initialGeneralPhases: Phase[] = [
     status: "waiting",
     tasks: [
       { id: "g-8-1", title: "Configurar Ambientes (Dev/Staging/Prod)", completed: false },
-      { id: "g-8-2", title: "Hospedagem (Vercel/Render) e Domínio", completed: false },
-      { id: "g-8-3", title: "CI/CD Pipeline", completed: false },
+      { id: "g-8-2", title: "Hospedagem Hostinger e Domínio", completed: false },
     ],
   },
   {
@@ -53,6 +54,7 @@ const initialGeneralPhases: Phase[] = [
     status: "waiting",
     tasks: [
       { id: "g-9-1", title: "Monitoramento e Analytics", completed: false },
+      { id: "g-9-2", title: "Análise e melhorias para a versão 2 do projeto", completed: false },
       { id: "g-9-2", title: "SEO e Marketing", completed: false },
     ],
   },
@@ -65,9 +67,12 @@ const initialFrontendPhases: Phase[] = [
     description: "Concluída (95%)",
     status: "done",
     tasks: [
-      { id: "f-2-1", title: "Wireframes (Home, Carrinho, Login)", completed: true },
+      { id: "f-2-1", title: "Wireframes (Home, Carrinho, Login, Histórico, Mapa, Notificações)", completed: true },
+      { id: "f-2-2", title: "Wireframes (Restaurantes, Detalhes, cupons)", completed: true },
+      { id: "f-2-2", title: "Wireframes (Checkout, Pagamento, Entrega)", completed: true },
       { id: "f-2-2", title: "Identidade Visual e Acessibilidade", completed: true },
       { id: "f-2-3", title: "Protótipos Interativos (Wouter)", completed: true },
+      { id: "f-2-4", title: "Refatoração com UI Kit Oficial", completed: false },
     ],
   },
   {
@@ -76,11 +81,12 @@ const initialFrontendPhases: Phase[] = [
     description: "Em Desenvolvimento (70%)",
     status: "in-progress",
     tasks: [
-      { id: "f-3-1", title: "Home (Busca, Categorias, Cards)", completed: true },
-      { id: "f-3-2", title: "Página Restaurantes (Listagem e Detalhes)", completed: true },
-      { id: "f-3-3", title: "Sidebar de Carrinho", completed: true },
+      { id: "f-3-1", title: " Responsividade de wireframes - Home (Busca, Categorias, Cards)", completed: true },
+      { id: "f-3-2", title: "Responsividade de wireframes - Restaurantes (Listagem e Detalhes)", completed: true },
+      { id: "f-3-3", title: "Responsividade de wireframes - Checkout, Pagamento, Entrega", completed: true },
       { id: "f-3-4", title: "Interface de Autenticação (Modais)", completed: true },
-      { id: "f-3-5", title: "Checkout e Confirmação de Pedido", completed: false },
+      { id: "f-3-5", title: "Responsividade de wireframes - Carrinho", completed: true },
+      { id: "f-3-6", title: "Checkout e Confirmação de Pedido", completed: false },
     ],
   },
   {
@@ -242,138 +248,184 @@ const Index = () => {
   const totalMvpProgress = () => calculateProgress(mvpPhases.flatMap(p => p.tasks));
 
   return (
-    <div className="min-h-screen bg-background">
-      <ProjectHeader totalProgress={totalMasterProgress()} />
+    <div className="min-h-screen bg-[#0c0c0c] text-slate-200">
+      {/* Header Section */}
+      <header className="border-b border-white/5 bg-[#111111]/80 backdrop-blur-xl sticky top-0 z-50">
+        <div className="container mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 bg-emerald-500/10 rounded-xl border border-emerald-500/20">
+              <Package className="w-6 h-6 text-emerald-500" />
+            </div>
+            <div>
+              <h1 className="text-xl font-bold text-white tracking-tight">Brazukas Engineering Center</h1>
+              <div className="flex items-center gap-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <p className="text-xs text-emerald-500/80 font-mono font-medium">v1.0.0 // Phase 2: Refinement</p>
+              </div>
+            </div>
+          </div>
+          <SystemHealthMonitor />
+        </div>
+      </header>
 
       <main className="container mx-auto px-4 py-8 space-y-8">
-        <Tabs defaultValue="frontend" className="w-full">
-          <div className="flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
-            <div className="overflow-x-auto w-full md:w-auto">
-              <TabsList>
-                <TabsTrigger value="general">Geral</TabsTrigger>
-                <TabsTrigger value="frontend">Frontend</TabsTrigger>
-                <TabsTrigger value="backend">Backend</TabsTrigger>
-                <TabsTrigger value="mvp-tracking" className="text-blue-600 data-[state=active]:text-blue-700">Sprint MVP (29/12)</TabsTrigger>
-              </TabsList>
-            </div>
+        {/* 1. Visão Geral (360) */}
+        <ProgressTracker />
 
-            <div className="flex items-center gap-2 text-sm text-muted-foreground whitespace-nowrap">
-              <span className="flex h-2 w-2 rounded-full bg-green-500" />
-              System Online
-            </div>
+        <div className="grid lg:grid-cols-3 gap-8">
+          {/* Left Column: Roadmap & Tracks (2/3) */}
+          <div className="lg:col-span-2 space-y-8">
+            <Tabs defaultValue="frontend" className="w-full">
+              <div className="flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
+                <div className="overflow-x-auto w-full md:w-auto">
+                  <TabsList className="bg-[#161616] border border-white/5 text-slate-400">
+                    <TabsTrigger value="general" className="data-[state=active]:bg-emerald-500/20 data-[state=active]:text-emerald-500">Geral</TabsTrigger>
+                    <TabsTrigger value="frontend" className="data-[state=active]:bg-emerald-500/20 data-[state=active]:text-emerald-500">Frontend</TabsTrigger>
+                    <TabsTrigger value="backend" className="data-[state=active]:bg-emerald-500/20 data-[state=active]:text-emerald-500">Backend</TabsTrigger>
+                    <TabsTrigger value="mvp-tracking" className="text-blue-400 data-[state=active]:text-blue-400 data-[state=active]:bg-blue-500/20">Backend Integration</TabsTrigger>
+                  </TabsList>
+                </div>
+              </div>
+
+              <TabsContent value="general" className="space-y-6 animate-in fade-in-50 duration-500">
+                <h2 className="text-2xl font-bold tracking-tight text-white">Planejamento & Deploy</h2>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {generalPhases.map(phase => (
+                    <PhaseCard
+                      key={phase.id}
+                      phase={phase}
+                      progress={calculateProgress(phase.tasks)}
+                      onTaskToggle={handleToggleWithPassword(setGeneralPhases)}
+                      className="bg-[#161616] border-white/5"
+                    />
+                  ))}
+                </div>
+                <ScopeChangeNote />
+              </TabsContent>
+
+              <TabsContent value="frontend" className="space-y-6 animate-in fade-in-50 duration-500">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-2xl font-bold tracking-tight text-pink-500">Frontend Roadmap</h2>
+                  <div className="text-sm text-slate-400">
+                    Foco: <span className="font-semibold text-emerald-400">Fase 3 - Visual / Interação</span>
+                  </div>
+                </div>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {frontendPhases.map(phase => (
+                    <PhaseCard
+                      key={phase.id}
+                      phase={phase}
+                      progress={calculateProgress(phase.tasks)}
+                      onTaskToggle={handleToggleWithPassword(setFrontendPhases)}
+                      className="bg-[#161616] border-white/5"
+                    />
+                  ))}
+                </div>
+              </TabsContent>
+
+              <TabsContent value="backend" className="space-y-6 animate-in fade-in-50 duration-500">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-2xl font-bold tracking-tight text-indigo-500">Backend Roadmap</h2>
+                  <div className="text-sm text-slate-400">
+                    Foco: <span className="font-semibold text-emerald-400">Fase 4 - API / Regras</span>
+                  </div>
+                </div>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {backendPhases.map(phase => (
+                    <PhaseCard
+                      key={phase.id}
+                      phase={phase}
+                      progress={calculateProgress(phase.tasks)}
+                      onTaskToggle={handleToggleWithPassword(setBackendPhases)}
+                      className="bg-[#161616] border-white/5"
+                    />
+                  ))}
+                </div>
+              </TabsContent>
+
+              <TabsContent value="mvp-tracking" className="space-y-8 animate-in fade-in-50 duration-500">
+                <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6 flex items-start gap-4">
+                  <div className="p-3 bg-blue-500/20 rounded-full">
+                    <Rocket className="w-6 h-6 text-blue-400" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h3 className="text-lg font-bold text-white">Integração: Backend Core</h3>
+                        <p className="text-sm text-slate-400 mt-1">
+                          Status: Conectando Frontend ao API Gateway
+                        </p>
+                      </div>
+                      <span className="text-2xl font-bold text-blue-400">{totalMvpProgress()}%</span>
+                    </div>
+                    <div className="mt-4 w-full bg-blue-900/40 rounded-full h-2 overflow-hidden">
+                      <div
+                        className="bg-blue-500 h-full transition-all duration-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]"
+                        style={{ width: `${totalMvpProgress()}%` }}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <h3 className="font-semibold text-lg text-white">Visão do Cliente (OrderPage)</h3>
+                    <TrackingMockup />
+                  </div>
+                  <div className="space-y-4">
+                    <h3 className="font-semibold text-lg text-white">Visão do Motorista (DriverApp)</h3>
+                    <DriverAppMockup />
+                  </div>
+                </div>
+
+                <HeaderMockup />
+
+                <div className="grid md:grid-cols-2 gap-6 pt-4">
+                  {mvpPhases.map(phase => (
+                    <PhaseCard
+                      key={phase.id}
+                      phase={phase}
+                      progress={calculateProgress(phase.tasks)}
+                      onTaskToggle={handleToggleWithPassword(setMvpPhases)}
+                      className="bg-[#161616] border-white/5"
+                    />
+                  ))}
+                </div>
+              </TabsContent>
+            </Tabs>
           </div>
 
-          <div className="bg-warning/10 border border-warning/20 rounded-lg p-4 flex items-start gap-3 mb-8">
-            <AlertCircle className="w-5 h-5 text-warning flex-shrink-0 mt-0.5" />
-            <div>
-              <p className="text-sm font-medium text-foreground">
-                Prazo de Entrega Final: <span className="font-bold">30 de Dezembro de 2025</span>
-              </p>
-              <p className="text-xs text-muted-foreground mt-1">
-                Progresso Master (Global): {totalMasterProgress()}%
-              </p>
-            </div>
-          </div>
+          {/* Right Column: Live Logs & Info (1/3) */}
+          <div className="space-y-6">
+            <LogIntegracao />
 
-          <TabsContent value="general" className="space-y-6 animate-in fade-in-50 duration-500">
-            <h2 className="text-2xl font-bold tracking-tight">Planejamento & Deploy</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              {generalPhases.map(phase => (
-                <PhaseCard
-                  key={phase.id}
-                  phase={phase}
-                  progress={calculateProgress(phase.tasks)}
-                  onTaskToggle={handleToggleWithPassword(setGeneralPhases)}
-                />
-              ))}
-            </div>
-            <ScopeChangeNote />
-          </TabsContent>
+            <div className="bg-[#161616] border border-white/5 rounded-xl p-6">
+              <h3 className="text-sm font-medium text-white mb-4 flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 text-amber-500" />
+                Deadlines Técnicos
+              </h3>
 
-          <TabsContent value="frontend" className="space-y-6 animate-in fade-in-50 duration-500">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold tracking-tight text-pink-600">Frontend Roadmap</h2>
-              <div className="text-sm text-muted-foreground">
-                Foco: <span className="font-semibold text-primary">Fase 3 - Visual / Interação</span>
-              </div>
-            </div>
-            <div className="grid md:grid-cols-2 gap-6">
-              {frontendPhases.map(phase => (
-                <PhaseCard
-                  key={phase.id}
-                  phase={phase}
-                  progress={calculateProgress(phase.tasks)}
-                  onTaskToggle={handleToggleWithPassword(setFrontendPhases)}
-                />
-              ))}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="backend" className="space-y-6 animate-in fade-in-50 duration-500">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold tracking-tight text-indigo-600">Backend Roadmap</h2>
-              <div className="text-sm text-muted-foreground">
-                Foco: <span className="font-semibold text-primary">Fase 4 - API / Regras</span>
-              </div>
-            </div>
-            <div className="grid md:grid-cols-2 gap-6">
-              {backendPhases.map(phase => (
-                <PhaseCard
-                  key={phase.id}
-                  phase={phase}
-                  progress={calculateProgress(phase.tasks)}
-                  onTaskToggle={handleToggleWithPassword(setBackendPhases)}
-                />
-              ))}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="mvp-tracking" className="space-y-8 animate-in fade-in-50 duration-500">
-            <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 flex items-start gap-3">
-              <Rocket className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-              <div>
-                <p className="text-sm font-medium text-foreground">
-                  Sprint MVP: Rastreamento em Tempo Real
-                </p>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Deadline Imediato: 29/12 | Foco na Fase 3 do Master
-                </p>
-                <div className="mt-2 w-full bg-blue-200/20 rounded-full h-1.5 overflow-hidden">
-                  <div
-                    className="bg-blue-500 h-full transition-all duration-500"
-                    style={{ width: `${totalMvpProgress()}%` }}
-                  />
+              <div className="space-y-4">
+                <div className="p-3 bg-white/5 rounded-lg border border-white/5">
+                  <p className="text-xs text-gray-400 mb-1">Próximo Milestone</p>
+                  <p className="text-sm font-semibold text-white">Refatoração B2B (Fev/2026)</p>
+                </div>
+                <div className="p-3 bg-white/5 rounded-lg border border-white/5">
+                  <p className="text-xs text-gray-400 mb-1">Progresso Master (Global)</p>
+                  <div className="flex items-center gap-2">
+                    <p className="text-lg font-bold text-white">{totalMasterProgress()}%</p>
+                    <span className="text-xs text-emerald-500 bg-emerald-500/10 px-1.5 py-0.5 rounded">+2% essa semana</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <h3 className="font-semibold text-lg">Visão do Cliente (OrderPage)</h3>
-                <TrackingMockup />
-              </div>
-              <div className="space-y-4">
-                <h3 className="font-semibold text-lg">Visão do Motorista (DriverApp)</h3>
-                <DriverAppMockup />
-              </div>
-            </div>
-
-            <HeaderMockup />
-
-            <div className="grid md:grid-cols-2 gap-6 pt-4">
-              {mvpPhases.map(phase => (
-                <PhaseCard
-                  key={phase.id}
-                  phase={phase}
-                  progress={calculateProgress(phase.tasks)}
-                  onTaskToggle={handleToggleWithPassword(setMvpPhases)}
-                />
-              ))}
-            </div>
-          </TabsContent>
-        </Tabs>
-
-        <CompetitorAnalysis />
+            <CompetitorAnalysis className="bg-[#161616] border-white/5" />
+          </div>
+        </div>
       </main>
     </div>
   );
