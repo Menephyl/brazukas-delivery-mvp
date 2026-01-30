@@ -291,17 +291,24 @@ const Index = () => {
               </div>
 
               <TabsContent value="general" className="space-y-6 animate-in fade-in-50 duration-500">
-                <h2 className="text-2xl font-bold tracking-tight text-white">Planejamento & Deploy</h2>
+                <h2 className="text-2xl font-bold tracking-tight text-white">Visão Geral Completa</h2>
                 <div className="grid md:grid-cols-2 gap-6">
-                  {generalPhases.map(phase => (
-                    <PhaseCard
-                      key={phase.id}
-                      phase={phase}
-                      progress={calculateProgress(phase.tasks)}
-                      onTaskToggle={handleToggleWithPassword(setGeneralPhases)}
-                      className="bg-[#161616] border-white/5"
-                    />
-                  ))}
+                  {/* Combine all phases for the General View, sorted by ID */}
+                  {[
+                    ...generalPhases.map(p => ({ phase: p, setter: setGeneralPhases })),
+                    ...frontendPhases.map(p => ({ phase: p, setter: setFrontendPhases })),
+                    ...backendPhases.map(p => ({ phase: p, setter: setBackendPhases }))
+                  ]
+                    .sort((a, b) => a.phase.id - b.phase.id) // Sort by Phase ID
+                    .map(({ phase, setter }) => (
+                      <PhaseCard
+                        key={phase.id}
+                        phase={phase}
+                        progress={calculateProgress(phase.tasks)}
+                        onTaskToggle={handleToggleWithPassword(setter)}
+                        className="bg-[#161616] border-white/5"
+                      />
+                    ))}
                 </div>
                 <ScopeChangeNote />
               </TabsContent>
@@ -314,6 +321,17 @@ const Index = () => {
                   </div>
                 </div>
                 <div className="grid md:grid-cols-2 gap-6">
+                  {/* Show Phase 1 (from General) in Frontend as requested */}
+                  {generalPhases.filter(p => p.id === 1).map(phase => (
+                    <PhaseCard
+                      key={phase.id}
+                      phase={phase}
+                      progress={calculateProgress(phase.tasks)}
+                      onTaskToggle={handleToggleWithPassword(setGeneralPhases)}
+                      className="bg-[#161616] border-white/5 opacity-80" // Slightly dimmed to show it's shared/foundational
+                    />
+                  ))}
+
                   {frontendPhases.map(phase => (
                     <PhaseCard
                       key={phase.id}

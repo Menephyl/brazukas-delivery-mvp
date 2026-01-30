@@ -4,7 +4,7 @@ import { MapPin, Navigation, Clock, Phone } from "lucide-react";
 
 export const TrackingMockup = () => {
   return (
-    <Card className="border-2 border-success/20">
+    <Card className="border-2 border-white/5 bg-[#161616]">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <MapPin className="w-5 h-5 text-success" />

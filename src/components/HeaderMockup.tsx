@@ -4,7 +4,7 @@ import { Package, Store, Truck } from "lucide-react";
 
 export const HeaderMockup = () => {
   return (
-    <Card className="border-2 border-accent/20">
+    <Card className="border-2 border-white/5 bg-[#161616]">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Package className="w-5 h-5 text-accent" />
@@ -23,7 +23,7 @@ export const HeaderMockup = () => {
               </div>
               <span className="font-bold text-lg">Brazukas Delivery</span>
             </div>
-            
+
             <div className="flex items-center gap-2">
               <Button variant="outline" size="sm" className="gap-2">
                 <Store className="w-4 h-4" />

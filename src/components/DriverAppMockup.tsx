@@ -5,7 +5,7 @@ import { Truck, MapPin, Package, CheckCircle, Navigation } from "lucide-react";
 
 export const DriverAppMockup = () => {
   return (
-    <Card className="border-2 border-warning/20">
+    <Card className="border-2 border-white/5 bg-[#161616]">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Truck className="w-5 h-5 text-warning" />
