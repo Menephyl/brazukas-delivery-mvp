@@ -1,5 +1,4 @@
-import { Activity, Database, Zap } from "lucide-react";
-import { motion } from "framer-motion";
+import { Activity, Database, Zap } from "lucide-react"; import { motion } from "framer-motion";
 
 export const SystemHealthMonitor = () => {
     return (

@@ -7,7 +7,7 @@ interface ProjectHeaderProps {
 
 export const ProjectHeader = ({ totalProgress }: ProjectHeaderProps) => {
   return (
-    <header className="bg-card border-b border-border sticky top-0 z-50 backdrop-blur-sm bg-card/95">
+    <header className="border-b border-border sticky top-0 z-50 backdrop-blur-sm bg-card/95">
       <div className="container mx-auto px-4 py-6">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">

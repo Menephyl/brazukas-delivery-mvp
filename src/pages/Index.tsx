@@ -55,7 +55,8 @@ const initialGeneralPhases: Phase[] = [
     tasks: [
       { id: "g-9-1", title: "Monitoramento e Analytics", completed: false },
       { id: "g-9-2", title: "Análise e melhorias para a versão 2 do projeto", completed: false },
-      { id: "g-9-2", title: "SEO e Marketing", completed: false },
+      { id: "g-9-3", title: "SEO e Marketing", completed: false },
+      { id: "g-9-4", title: "Extra: Rastreamento em Tempo Real (Futuro)", completed: false },
     ],
   },
 ];
@@ -64,7 +65,7 @@ const initialFrontendPhases: Phase[] = [
   {
     id: 2,
     title: "Fase 2: Design UI/UX",
-    description: "Concluída (95%)",
+    description: "Concluída (100%)",
     status: "done",
     tasks: [
       { id: "f-2-1", title: "Wireframes (Home, Carrinho, Login, Histórico, Mapa, Notificações)", completed: true },
@@ -81,7 +82,7 @@ const initialFrontendPhases: Phase[] = [
     description: "Em Desenvolvimento (70%)",
     status: "in-progress",
     tasks: [
-      { id: "f-3-1", title: " Responsividade de wireframes - Home (Busca, Categorias, Cards)", completed: true },
+      { id: "f-3-1", title: "Responsividade de wireframes - Home (Busca, Categorias, Cards)", completed: true },
       { id: "f-3-2", title: "Responsividade de wireframes - Restaurantes (Listagem e Detalhes)", completed: true },
       { id: "f-3-3", title: "Responsividade de wireframes - Checkout, Pagamento, Entrega", completed: true },
       { id: "f-3-4", title: "Interface de Autenticação (Modais)", completed: true },
@@ -95,10 +96,9 @@ const initialFrontendPhases: Phase[] = [
     description: "Próximas Etapas",
     status: "pending",
     tasks: [
-      { id: "f-6-1", title: "Rastreamento em Tempo Real (Mapa Leaflet)", completed: false },
+      { id: "f-6-1", title: "Rastreamento Padrão (Status manual pelo restaurante)", completed: false },
       { id: "f-6-2", title: "Push Notifications de Status", completed: false },
       { id: "f-6-3", title: "Página de Histórico do Cliente", completed: false },
-      { id: "f-6-4", title: "Interface do Entregador (PWA)", completed: false },
     ],
   },
 ];
@@ -174,7 +174,7 @@ const initialMvpPhases: Phase[] = [
   },
   {
     id: 4,
-    title: "Passo 3: App do Entregador",
+    title: " EXTRA! Passo 3: App do Entregador",
     description: "Funcionalidade Real",
     tasks: [
       { id: "mvp-3-1", title: "Interface de aceite de corrida", completed: false },

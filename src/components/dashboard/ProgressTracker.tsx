@@ -11,6 +11,7 @@ const pillars = [
         bg: "bg-emerald-500/20",
         description: "Infra & Base Code",
     },
+
     {
         id: "phase2",
         title: "Phase 2: UI/UX",

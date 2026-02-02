@@ -6,9 +6,9 @@ export const ScopeChangeNote = () => {
     <Alert variant="destructive" className="border-2">
       <AlertTriangle className="h-5 w-5" />
       <AlertDescription className="font-medium">
-        <strong>Regra de Mudança de Escopo:</strong> Para manter o prazo e a qualidade, 
-        toda alteração de escopo deve ser formalmente solicitada e aprovada neste painel. 
-        Mudanças não documentadas podem comprometer a entrega de 30/12.
+        <span className="font-bold">Regra de Mudança de Escopo:</span> Para manter o prazo e a qualidade,
+        toda alteração de escopo deve ser formalmente solicitada e aprovada neste painel.
+        Mudanças não documentadas podem comprometer a entrega de 30/02/2026.
       </AlertDescription>
     </Alert>
   );

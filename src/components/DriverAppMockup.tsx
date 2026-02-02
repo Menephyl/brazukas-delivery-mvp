@@ -86,7 +86,7 @@ export const DriverAppMockup = () => {
         </div>
 
         <p className="text-xs text-muted-foreground text-center">
-          watchPosition API + Supabase UPDATE em order_tracking
+          watchPosition API
         </p>
       </CardContent>
     </Card>
